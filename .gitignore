@@ -1,0 +1,17 @@
+# Packer
+**/credentials.auto.pkrvars.hcl
+**/packer_cache
+
+# Terraform
+**/.terraform
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/credentials.auto.tfvars
+terraform/*.json
+terraform/*.json.lock
+
+# RKE
+kubernetes/rke/kube_config_cluster.yml
+kubernetes/rke/cluster.rkestate
+kubernetes/rke/rook/*

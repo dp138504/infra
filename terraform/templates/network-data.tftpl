@@ -1,0 +1,15 @@
+#cloud-config
+network:
+  version: 2
+  ethernets:
+    eth0:
+      match:
+        name: enp*
+      %{ if dhcp == true }dhcp4: true
+      %{ else }addresses:
+        - ${ip_address}/${netmask}
+      gateway4: ${gateway}
+      nameservers:
+        addresses: ${nameservers}
+        search: ${search_domains}
+      %{ endif }

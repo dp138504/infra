@@ -1,0 +1,31 @@
+#cloud-config
+hostname: ${hostname}
+fqdn: ${hostname}.crossfits.dpitts.us
+prefer_fqdn_over_hostname: true
+
+users:
+  - name: dap
+    gecos: Dylan A. Pitts
+    primary_group: dap
+    groups: sudo
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBFjiKw/YVsA/KH/wqKhkKwXb/T3l6uv3Gu0zKADnfLx Dylan HomeLab VMs
+    lock_passwd: false
+    shell: /usr/bin/zsh
+    passwd: CHANGEME
+
+packages: ${packages}
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+
+growpart:
+  mode: auto
+  devices: ["/"]
+
+runcmd:
+  - sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  - sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="half-life"/g' /root/.zshrc
+  - chsh root -s /usr/bin/zsh
+  - su - dap -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended'
+  - su - dap -c 'sed -i "s/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"half-life\"/g" /home/dap/.zshrc'

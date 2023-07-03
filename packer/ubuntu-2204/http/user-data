@@ -1,0 +1,108 @@
+#cloud-config
+autoinstall:
+  version: 1
+  refresh-installer:
+    update: true
+  ssh:
+    install-server: true
+    allow-pw: true
+  packages:
+    - qemu-guest-agent
+    - sudo
+    - zsh
+  locale: en_US.UTF-8
+  keyboard:
+    layout: us
+  storage:
+    layout:
+      name: direct
+    swap:
+      size: 0
+  late-commands:
+    - reboot now
+  user-data:
+    package_update: true
+    package_upgrade: true
+    package_reboot_if_required: true
+    timezone: America/New_York
+    users:
+      - name: packer
+        groups: [sudo]
+        lock-passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        passwd: CHANGEME
+    ca_certs: 
+      trusted:
+        - |
+          -----BEGIN CERTIFICATE-----
+          MIIF/zCCA+egAwIBAgICEAAwDQYJKoZIhvcNAQELBQAwgZIxCzAJBgNVBAYTAlVT
+          MQswCQYDVQQIDAJWQTEXMBUGA1UEBwwOVmlyZ2luaWEgQmVhY2gxEjAQBgNVBAoM
+          CUNSb1NTRklUczEtMCsGA1UECwwkQ1JvU1NGSVRzIFJvb3QgQ2VydGlmaWNhdGUg
+          QXV0aG9yaXR5MRowGAYDVQQDDBFDUm9TU0ZJVHMgUm9vdCBDQTAeFw0yMTA5MTAx
+          NTE0MTZaFw0zMTA5MDgxNTE0MTZaMIGJMQswCQYDVQQGEwJVUzELMAkGA1UECAwC
+          VkExEjAQBgNVBAoMCUNSb1NTRklUczE1MDMGA1UECwwsQ1JvU1NGSVRzIEludGVy
+          bWVkaWF0ZSBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkxIjAgBgNVBAMMGUNSb1NTRklU
+          cyBJbnRlcm1lZGlhdGUgQ0EwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoIC
+          AQDBkoo5vH2JKkjlfYHmMfBSFDpU+2JLlSdsz2zrjuh0HnUkliEDbD4yNlOnezRw
+          uVjUk7wdBNm4NiUfJ4kdLpaDJOJBxfjmz8ZzID4FjaSxflKE98HGhACIGwnocMwa
+          Yi0ZJGFs2aunoWY3ZmoMCyTmdk1xzQdMoLX3wrAUSEKp8qlsiwdwtCQNfYkoutAq
+          qJUsDMl56YZ7ny/KcgDOx1US8JIkdmyR9tgVjEehJ246XM0pvT90U2Xyur5ysriZ
+          kh2VxQhcWJZyizNRWclSpJu+ZizQcjPYHojL/GLIE6+YHRkMXZXQ/iCw/go0vnVj
+          v2YvGZadB7YNvNJOo48s46++63ZJEa1zXWVYiuqDxx3FfhMg0ZU8dl16cC3hDENj
+          WKp1LXC/OVzeU+ycPXtj1bRB4mS02N4RNZ0ELvIkdOrHe5Yb7wEhklllga9n9aZR
+          skT/1k4c1JUZoBEToOuLUAonnmsI/XAdcvLRGyeKXwJ0e++xwMtUH7f1NZV+bkO2
+          wWH7LjekZhs4wBT261PjK5Y3uQR2o+IHWpKplC2X8m3hohAr3lLJM7pILagopg08
+          lTX2gwO4VkffrcNis+lvgvdB7Oc7L3Nl97cA0N7k5dn7RPu2mz5UX60EneUQXRKc
+          0ClEeqM2yoj6NdiF29XYz0wKk3jPTcD18rPI+zIC9jEVIQIDAQABo2YwZDAdBgNV
+          HQ4EFgQUCdjxd827R1gGCc7x/zE9lH0MLF0wHwYDVR0jBBgwFoAUjcxfEuHmBWiW
+          sf528A4/E6edMDUwEgYDVR0TAQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8EBAMCAYYw
+          DQYJKoZIhvcNAQELBQADggIBAEEarXrx3KZEHpYIrnWD/uhLgI3ajLxYs9atec95
+          mH/yzFPpwDg/41CQh2c1jjzUsBabeVGFlYfTrhPePDejcvRGeyrCzqiJV5546RB0
+          0t41HmZfxNr+CRGlH2kAndtrPeOSDJjaxl1iVEyHBZXlb4DEtSOA0X9BKZRIrdQ6
+          RYW0j+ce2/Zyen0N65ZF7qAmlOoVYYs2T66LGhM/yA7DNievd2bWrwC3cwwm6pAO
+          b8VecijS7w9CP2A2kUL04/29xDOtit2CtwrpWRnalMtd6oZJOsp+gE/dTnq5+hW3
+          0tE3EzWbLdEtDMB97DWPqxtew8cElfSFakg03ILjwq2wd8H9uzeveOnpg5BilT8G
+          w1es8zc8FfmFELjkp6oaAn8eIzgnbyTA6N9YLJG+3CRdTkohsExOv5jQLZCK7J+r
+          1fu5Lp2pb/dC/qhrTG2uzggrRUh5iH8mxgeXz3VkPTJQB9hZhUzKYgk4SMiXJXt+
+          QnrQABcdcglvthPIvCEtQPy2H244W6NfhwvyHUWj4AmtVWan5lEUrWYnO/qLOG9g
+          ZOLTjqfzc7ZYiDZWFZ1EAaRVDf5MeA0vQzKgOwhb1KbWIMwoHwbR1PF13f6TdfQW
+          fZTqongvMMw9n9IOKyx8Q0J+mk/sYCz6SI5ZAjeIk2gnqRRicVchnqT6A7ZnBXdE
+          jSMa
+          -----END CERTIFICATE-----
+        - |
+          -----BEGIN CERTIFICATE-----
+          MIIGFzCCA/+gAwIBAgIUWxhSHmvLBdJQQntiLSNPflNzsoAwDQYJKoZIhvcNAQEL
+          BQAwgZIxCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJWQTEXMBUGA1UEBwwOVmlyZ2lu
+          aWEgQmVhY2gxEjAQBgNVBAoMCUNSb1NTRklUczEtMCsGA1UECwwkQ1JvU1NGSVRz
+          IFJvb3QgQ2VydGlmaWNhdGUgQXV0aG9yaXR5MRowGAYDVQQDDBFDUm9TU0ZJVHMg
+          Um9vdCBDQTAeFw0yMTA5MTAxNTAzMjVaFw00MTA5MDUxNTAzMjVaMIGSMQswCQYD
+          VQQGEwJVUzELMAkGA1UECAwCVkExFzAVBgNVBAcMDlZpcmdpbmlhIEJlYWNoMRIw
+          EAYDVQQKDAlDUm9TU0ZJVHMxLTArBgNVBAsMJENSb1NTRklUcyBSb290IENlcnRp
+          ZmljYXRlIEF1dGhvcml0eTEaMBgGA1UEAwwRQ1JvU1NGSVRzIFJvb3QgQ0EwggIi
+          MA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQC+3a3OkCDVbIL1PPqRANqB1K+x
+          flCvq6ju9TivAHAc9NrelM0Z5Tvu1kwKPcY+9p2SyiZatfDKFGxdd7IAEIRsvtr3
+          mNp2Cp3LrHzrlFNVGbCyQ12+STjBtnXc1UDRB1IlPvlMh9Una9QjIxjNIK2rpO5S
+          punqCDpYjPF4AQtat6/9KCL+Pg8Zmooc7bFF0ZLR75bIW3RHrFKWZjOjv5SMLG2W
+          PEe32kOKNlSw4XwCoQ8LrclIIGS/KqvYacDw0mtYRgs9uXlZCH22WkRbCUg6T2R/
+          EGPe2zXSoopScTEw+x+h4WLOmsYvr7Bm8zI8x7gwHgbwyNTBG3iqumIBTB0dS2We
+          S5iSPaOdslxli37EULBy+EI9/8EILG6aXKCinmIHY1wxJUJn/u/azjPj46OZrcvi
+          fcUMcyYH/4w5SWYNEIop2Vq23wTjRkLYW+Od+OLP065dtI9T8PeSE7DQgfeuxG5m
+          QxrEgJkkZSxT+xxGOww63e83Ildemq5NIBFZLqqUpgvCkRmxtu1o4E9kT5TAZi/K
+          ISue7Nm+dBdid96mHNkx7rUWGCeMNGkqWIdleojvChuXb2r0w2aGTk8vgX54LJo1
+          1IIjKvbUZS97K1gywnTK1aKcphCc9XYOMSCMyOA0z22DhERwCSsJWkVDCqcldxz+
+          dCsNH9JbikVdFeQpWwIDAQABo2MwYTAdBgNVHQ4EFgQUjcxfEuHmBWiWsf528A4/
+          E6edMDUwHwYDVR0jBBgwFoAUjcxfEuHmBWiWsf528A4/E6edMDUwDwYDVR0TAQH/
+          BAUwAwEB/zAOBgNVHQ8BAf8EBAMCAYYwDQYJKoZIhvcNAQELBQADggIBAG6KMcaU
+          p1vKm4JyrO0vo+wQVFdlsK0zIE0CX+gDELlNcBcC8GYZ5M1yKpE9VRj3GKoAW4Bq
+          inyHe6DxHxdvx04ZVcoBkv3Ju9zmWN4OTF3Y4hO45wy3bwMno5AXObfeiJftXVN0
+          IgmopxHeq0KjGGgZLBgMPUcPAMM01OVdCnEjaGw1ycXylkUagTq6eSKdhPPFd744
+          yEavYKwRp1iHOIaXlVg3FDTHax3e9iRC5ogA6Q6HMMgA/8Zc27hMh91Ag/Dvn+Sj
+          ALslw7OAXBwWNEyDD+gMXDrJ3RqjGtnhpWLlzMyAG2Jiy+DTuDdAe4LPBaR2c8v8
+          lqEuUKyudTmXEfSt7VleazFqTawsgdagGXwsN5YNceneOoHdJTwiz6ogD/g4v3J0
+          /DEH0v0V8swoY5p9t1h7hbRh7aE4knTgBICrzgZxba6o0WhV2C7DKYZgWoPPtL6C
+          hszFEJe5ntOj1Eb410s6BrtAUv6QxDaEfay6cVTRydnor+ZWOREgnk/HME8sf8lL
+          TcbXpCLULFHQP4srabvd9BjwdwGB4nEK/wS5cA+UdQKPzlDc6j5u1D2BG0y6cqZK
+          IobXVRuuTKqQhJpOsg7oaDp6gjkMph0RF1j3GCfMV8fg+R2wh0hgSu/De8XEBT1C
+          VqdIy6J8JqI6a6zMYqm61J3ysM5k98/xTlsv
+          -----END CERTIFICATE-----
